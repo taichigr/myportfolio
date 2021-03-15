@@ -1,0 +1,532 @@
+// ==============================
+// faundation
+// ==============================
+
+//変数
+$font-color_default: #000;
+$font-color_corp: rgb(156, 156, 156);
+$font-color_header: #fff;
+
+$bgColor__lightGray: #f6f5f4;
+$bgColor__Gray: rgba(100, 100, 100, 0.85);
+
+$site-width: 980px;
+$site-width-responsive: 100%;
+
+$font-size_s: 12px;
+$font-size_m: 14px;
+$font-size_default: 16px;
+$font-size_l: 18px;
+$font-size_xl: 24px;
+$font-size_xxl: 30px;
+$font-size_3l: 38px;
+
+$space_s: 5px;
+$space_m: 10px;
+$space_l: 15px;
+$space_xl: 20px;
+$space_xxl: 30px;
+$space_3l: 40px;
+
+
+$font-family_default: 'Noto Sans JP', sans-serif;
+
+// マップ型変数
+$breakpoints: ('sm': 'screen and (max-width: 414px)',
+  'md': 'screen and (max-width: 768px)',
+  'lg': 'screen and (max-width: 1000px)',
+  'xl': 'screen and (max-width: 1200px)',
+) !default;
+
+// mixin
+@mixin mq($breakpoint: sm) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
+
+// keyframes
+
+@keyframes SlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+html,
+body {
+  width: 100%;
+  color: $font-color_default;
+  font-size: $font-size_default;
+  line-height: 1.8;
+  font-family: $font-family_default;
+  text-size-adjust: 100%;
+  letter-spacing: 0.1em;
+}
+
+p,
+a {}
+
+a {
+  color: $font-color_default;
+  text-decoration: none;
+  transition: .3s;
+}
+
+a:hover {
+  border-bottom: 2px solid #fff;
+  font-weight: 900;
+  transition: .1s;
+}
+
+img {
+  width: 100%;
+  vertical-align: bottom;
+}
+
+
+
+
+// ==============================
+// layout
+// ==============================
+.l-header {
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  animation: SlideIn .7s;
+}
+
+.l-main {
+  width: 100%;
+}
+
+.l-cotainer {}
+
+.l-footer {
+  box-sizing: border-box;
+  width: 100%;
+  height: 60px;
+}
+
+// ==================================
+// object  component
+// ==================================
+
+// =================
+// hero
+// =================
+.c-hero {
+  background-image: url('../image/hero.jpeg');
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-title {
+    animation: SlideIn .7s;
+    box-sizing: border-box;
+    font-size: $font-size_3l;
+    color: $font-color_header;
+    font-weight: 900;
+    display: block;
+    background-color: $bgColor__Gray;
+    width: 240px;
+    height: 140px;
+    text-align: center;
+    padding: $space_m $space_l;
+  }
+}
+
+// =================
+// container
+// =================
+.c-container {
+  @include mq() {
+    width: $site-width-responsive;
+  }
+  @include mq($breakpoint: md){
+    width: $site-width-responsive;
+  }
+  margin-top: $space_xxl;
+  text-align: center;
+  width: $site-width;
+  margin-right: auto;
+  margin-left: auto;
+
+  &-title {
+    font-size: $font-size_3l;
+    font-weight: 900;
+  }
+}
+
+// =================
+// portfolio
+// =================
+.c-portfolio-link {
+  color: $bgColor__Gray;
+}
+.c-portfolio-link:hover {
+  border-bottom: 2px solid $font-color_default;
+  color: $font-color_default;
+}
+
+
+// ==============================
+// object project
+// ==============================
+.p-header {
+  box-sizing: border-box;
+  width: 100%;
+  height: 80px;
+  color: $font-color_default;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: $space_xl;
+  padding-right: $space_xl;
+  transition: .3s;
+
+  .title {
+    font-size: $font-size_xxl;
+    font-family: $font-family_default;
+    font-weight: bold;
+    color: $font-color_header;
+  }
+
+  &.float-active {
+    transition: .3s;
+    background: rgba(100, 100, 100, 0.9);
+  }
+
+  @include mq() {
+    height: 60px;
+    padding-right: $space_l;
+    padding-left: $space_l;
+  }
+}
+
+.p-menu-trigger {
+  display: none;
+  transition: all .4s;
+  box-sizing: border-box;
+  position: relative;
+  width: 40px;
+  height: 32px;
+  z-index: 3;
+
+  @include mq() {
+    display: inline-block;
+  }
+
+  span {
+    display: inline-block;
+    box-sizing: border-box;
+    position: absolute;
+    transition: all .3s;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: $font-color_corp;
+    border-radius: 4px;
+
+    &:nth-of-type(1) {
+      top: 0;
+    }
+
+    &:nth-of-type(2) {
+      top: 14px;
+    }
+
+    &:nth-of-type(3) {
+      bottom: 0;
+    }
+  }
+
+  &.active span {
+    &:nth-of-type(1) {
+      transform: translateY(12px) rotate(-45deg);
+    }
+
+    &:nth-of-type(2) {
+      opacity: 0;
+    }
+
+    &:nth-of-type(3) {
+      transform: translateY(-15px) rotate(45deg);
+    }
+  }
+}
+
+.p-menu-nav {
+  @include mq() {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: -100%;
+    background: $bgColor__Gray;
+    width: 100%;
+    height: 100vh;
+    padding-top: 50px;
+    transition: .5s;
+
+    &.active {
+      transition: .5s;
+      transform: translateX(-100%);
+      z-index: 2;
+    }
+  }
+}
+
+.p-menu {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  font-size: $font-size_xl;
+  font-family: $font-family_default;
+
+  &-item {
+    margin-right: $space_xl;
+  }
+
+  &-link {
+    color: $font-color_header;
+    font-weight: bold;
+  }
+
+  @include mq() {
+    display: block;
+    font-size: $font-size_xxl;
+
+    &-item {
+      margin-right: initial;
+    }
+
+    &-link {
+      display: block;
+      padding: $space_l;
+      text-align: center;
+    }
+  }
+}
+
+// =================
+// about skill
+// =================
+.p-about {
+  //animation: SlideIn .7s;
+  @include mq() {
+    opacity: 0;
+    transform: translate(0, 50px);
+    transition: all .6s ease-out;
+  }
+}
+
+.p-prof {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  &-text p {
+    text-align: left;
+  }
+
+  @include mq() {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &-img {
+    margin-right: auto;
+    margin-left: auto;
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 250px;
+    margin-bottom: $space_l;
+
+    &-container {
+      width: 100%;
+    }
+  }
+
+  &-text {
+    border-radius: 4px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: $bgColor__lightGray;
+    width: 70%;
+    padding: $space_xl;
+    box-sizing: border-box;
+
+    @include mq() {
+      width: 100%;
+    }
+  }
+}
+
+// =================
+// portfolio
+// =================
+.p-skill,
+.p-portfolio {
+  
+}
+
+.p-panel-group {
+  width: 100%;
+
+  &-flex {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+}
+
+.p-panel {
+  border: 4px solid $bgColor__lightGray;
+  border-radius: 4px;
+  margin-right: $space_xl;
+  margin-bottom: $space_xl;
+  box-sizing: border-box;
+  background: #fff;
+  position: relative;
+  transition: .5s;
+  &-title {
+    font-size: $font-size_xl;
+    padding: $space_l 0;
+  }
+
+  &-hover {
+    display: inline-block;
+    transition: .5s;
+
+    &:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+      transition: .5s;
+      border: 4px solid $bgColor__lightGray;
+    }
+  }
+
+  &-body {
+    border-radius: 4px;
+    margin-bottom: $space_m;
+    overflow: hidden;
+    height: 200px;
+  }
+
+  &-foot {
+    padding: $space_m;
+    & p {
+      text-align: left;
+    }
+  }
+
+  &-portfolio {
+    width: calc(33.3% - #{$space_xl});
+
+    @include mq() {
+      width: 100%;
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
+
+  &-skill {
+    width: calc(50% - #{$space_xl});
+
+    @include mq() {
+      width: 100%;
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
+}
+
+// =================
+// contact
+// =================
+.p-contact {
+  box-sizing: border-box;
+  &-item {
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: $space_3l;
+    background-color: $bgColor__lightGray;
+    width: 60%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+  }
+  &-link {
+    font-size: $font-size_xxl;
+    font-weight: 900;
+    &:hover {
+      border-bottom: 2px solid $font-color_default;
+    }
+  }
+}
+
+// =================
+// footer
+// =================
+.p-footer {
+  box-sizing: border-box;
+  background-color: $bgColor__Gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: $font-size_l;
+}
+
+// ==============================
+// object utility
+// ==============================
+.slide-top {
+  opacity: 0;
+  transform: translate(0, -20px);
+  transition: all 1s ease-out;
+}
+
+/* 下からフェードイン */
+.slide-bottom {
+  opacity: 0;
+  transform: translate(0, 50px);
+  transition: all 1s ease-out;
+}
+
+/* 左からフェードイン */
+.slide-left {
+  opacity: 0;
+  transform: translate(-20px, 0);
+  transition: all 1s ease-out;
+}
+
+/* 右からフェードイン */
+.slide-right {
+  opacity: 0;
+  transform: translate(70px, 0);
+  transition: all 1s ease-out;
+}
+
+// TODO:portfolioまとめページのリンクの変更
+// それぞれのリンク先を設定　サーバーを借りてから
+// ポートフォリオが増えてきたらスクロールできるようにする
